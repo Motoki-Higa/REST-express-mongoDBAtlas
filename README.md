@@ -10,8 +10,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 Make sure you have installed all of the following prerequisites on your development machine:
 
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
-- npm - [Download & Install npm](https://www.npmjs.com/get-npm)
+- [Node.js](https://nodejs.org/en/download/)
+- [Npm](https://www.npmjs.com/get-npm)
+- [Nodemon](https://www.npmjs.com/package/nodemon)
 
 ### Built with
 
