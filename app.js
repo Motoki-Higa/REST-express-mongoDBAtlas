@@ -14,38 +14,50 @@ require('dotenv').config()
 const uri = process.env.DB_CONNECTION;
 // Database Name
 const dbName = process.env.DB_NAME;
-// Create new instance
-const client = new MongoClient(uri, { useUnifiedTopology: true });
 
 // Use connect method to connect to the server
-// MongoClient.connect(uri, { useUnifiedTopology: true }, function(err, client) {
-//   assert.equal(null, err);
-//   console.log("Connected successfully to server");
-//   // const db = client.db(dbName);
-//   client.close();
-// });
+MongoClient.connect(uri, { useUnifiedTopology: true }, function(err, client) {
+  const database = client.db("sample_mflix");
+  const collection = database.collection("movies");
+  const cursor = collection.find();
+
+  if ((cursor.count()) === 0) {
+    console.log("No documents found!");
+  }
+  cursor.forEach(item => {
+    console.log(item);
+  });
+
+  // store database in app.locals gloablly, 
+  // then it can be used anywhere in the app by calling req.app.locals.database
+  app.locals.database = database;
+
+  // client.close();
+});
 
 
 // READ : Find Multiple Documents from database
-async function run() {
-  try {
-    await client.connect();
-    const database = client.db("sample_mflix");
-    const collection = database.collection("movies");
-    const cursor = collection.find();
+// async function run() {
+//   try {
+//     await client.connect();
+//     const database = client.db("sample_mflix");
+//     const collection = database.collection("movies");
+//     const cursor = collection.find();
 
-    // print a message if no documents were found
-    if ((await cursor.count()) === 0) {
-      console.log("No documents found!");
-    }
-    await cursor.forEach(item => {
-      console.log(item);
-    });
-  } finally {
-    await client.close();
-  }
-}
-run().catch(console.dir);
+//     app.locals.database = database;
+
+//     // print a message if no documents were found
+//     if ((await cursor.count()) === 0) {
+//       console.log("No documents found!");
+//     }
+//     await cursor.forEach(item => {
+//       console.log(item);
+//     });
+//   } finally {
+//     await client.close();
+//   }
+// }
+// run().catch(console.dir);
 
 
 // CREATE : Below code adds { name: "Red", town: "kanto" } to "movies"(collection) in "samle_mflix"(database)
