@@ -15,9 +15,15 @@ Make sure you have installed all of the following prerequisites on your developm
 
 ### Built with
 
+Main
+
 - [Express.js](https://www.npmjs.com/package/express)
 - [MongoDB native driver](https://www.npmjs.com/package/mongodb)
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+
+Additionals
+
+- [dotenv](https://www.npmjs.com/package/dotenv)
 
 ### Installing a project
 
