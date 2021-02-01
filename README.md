@@ -1,6 +1,6 @@
 # REST-express-mongoDBAtlas
 
-Simple CRUD REST api that connects to mongoDB.
+Simple CRUD REST api app which is connected to mongoDB via mongoDB native driver.
 
 ## Getting Started
 
