@@ -5,9 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
-
-require('dotenv').config()
+require('dotenv').config();
 
 // ================ mongoDB atlas ==================
 // Connection URL
@@ -17,67 +15,13 @@ const dbName = process.env.DB_NAME;
 
 // Use connect method to connect to the server
 MongoClient.connect(uri, { useUnifiedTopology: true }, function(err, client) {
-  const database = client.db("sample_mflix");
-  const collection = database.collection("movies");
-  const cursor = collection.find();
-
-  if ((cursor.count()) === 0) {
-    console.log("No documents found!");
-  }
-  cursor.forEach(item => {
-    console.log(item);
-  });
-
-  // store database in app.locals gloablly, 
-  // then it can be used anywhere in the app by calling req.app.locals.database
-  app.locals.database = database;
+  const db = client.db("sample_mflix");
+  // store db in app.locals gloablly, 
+  // then it can be used anywhere in the app by calling req.app.locals.db
+  app.locals.db = db;
 
   // client.close();
 });
-
-
-// READ : Find Multiple Documents from database
-// async function run() {
-//   try {
-//     await client.connect();
-//     const database = client.db("sample_mflix");
-//     const collection = database.collection("movies");
-//     const cursor = collection.find();
-
-//     app.locals.database = database;
-
-//     // print a message if no documents were found
-//     if ((await cursor.count()) === 0) {
-//       console.log("No documents found!");
-//     }
-//     await cursor.forEach(item => {
-//       console.log(item);
-//     });
-//   } finally {
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
-
-
-// CREATE : Below code adds { name: "Red", town: "kanto" } to "movies"(collection) in "samle_mflix"(database)
-// async function run() {
-//   try {
-//     await client.connect();
-//     const database = client.db("sample_mflix");
-//     const collection = database.collection("movies");
-//     // create a document to be inserted
-//     const doc = { name: "Red", town: "kanto" };
-//     const result = await collection.insertOne(doc);
-//     console.log(
-//       `${result.insertedCount} documents were inserted with the _id: ${result.insertedId}`,
-//     );
-//   } finally {
-//     await client.close();
-//   }
-// }
-// run().catch(console.dir);
-
 // =================================================
 
 // import routes
