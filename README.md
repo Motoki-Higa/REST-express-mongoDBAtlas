@@ -16,13 +16,13 @@ Make sure you have installed all of the following prerequisites on your developm
 
 ### Built with
 
-Main
+#### Main
 
-- [Express.js](https://www.npmjs.com/package/express)
-- [MongoDB native driver](https://www.npmjs.com/package/mongodb)
-- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- Backend - [Express.js](https://www.npmjs.com/package/express)
+- DB driver - [MongoDB native driver](https://www.npmjs.com/package/mongodb)
+- DB - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 
-Additionals
+#### Key packages (But not limited to below)
 
 - [dotenv](https://www.npmjs.com/package/dotenv)
 
@@ -38,6 +38,17 @@ To install the dependencies, run this in the application folder from the command
 
 ```
 npm install
+```
+
+### Connecting with DB
+
+As it's a personal db account, you might have to prepare your own NoSQL database to get the project working.
+
+Once your database is ready, create a `.env` file and save the connection and the database name like below:
+
+```
+DB_CONNECTION=your-connection-name
+DB_NAME=your-db-name
 ```
 
 ### Start a project
