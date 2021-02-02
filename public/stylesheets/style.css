@@ -1,8 +1,94 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/*****************************
+header
+*****************************/
+.header {
+  width: 100%;
+  height: auto;
+  padding: 24px;
+  background-color: rgb(95, 168, 159)
 }
 
-a {
-  color: #00B7FF;
+.header h1 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+/*****************************
+form
+*****************************/
+.formWrapper {
+  padding: 24px;
+  background-color: #d2d8de;
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.form__field:not(:first-of-type) {
+  margin-top: 10px;
+}
+
+.submitWrapper {
+  width: 100%;
+  text-align: center;
+  margin: 20px auto 0;
+}
+
+.form label {
+  display: block;
+  font-size: 14px;
+}
+
+.form input {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/*****************************
+total
+*****************************/
+.total {
+  padding: 24px;
+}
+
+.total__item,
+.total__cost {
+  text-align: center;
+}
+
+/*****************************
+wishlist
+*****************************/
+.wishlist {
+  padding: 0 24px;
+}
+
+.wishlist ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.wishlist__liInner {
+  padding: 24px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.wishlist__li {
+  margin-bottom: 24px;
+}
+
+.wishlist h2 {
+  font-size: 24px;
+}
+
+.wishlist h3 {
+  font-size: 18px;
 }

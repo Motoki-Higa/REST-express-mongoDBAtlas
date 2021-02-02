@@ -1,13 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>	Movie App </title>
-	<% include head %>
-</head>
-<body>
+  <head>
+    <title>	THE CRUD </title>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <%- include('header'); %>
 
-  <h1><%= title %></h1>
-  <p><%= title %></p>
+    <div class="row justify-content-sm-center">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="formWrapper">
+          <h2>Add an item to your wishlist!</h2>
+
+          <form action="/posts" method="post" class="form">
+            <div class="form__field">
+              <label for="product">PRODUCT</label>
+              <input type="text" name="product" id="product" >
+            </div>
+            <div class="form__field">
+              <label for="price">PRICE</label>
+              <input type="text" name="price" id="price" >
+            </div>
+            <div class="submitWrapper form__field--submit">
+              <button id="submit" class="btn btn-primary" type="submit">Add</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
   
-</body>
-</html>
+    <div class="total row">
+      <div class="col-xs-12 col-sm-6 offset-sm-3">
+        <div class="total__item">Total Item: </div>
+        <div class="total__cost">Total Value:</div>
+      </div>
+    </div>
+
+    <div class="wishlist">
+      <ul class="wishlist__ul row">
+      <% posts.forEach(post => { %>
+
+        <li class="wishlist__li col-xs-6 col-sm-4">
+          <div class="wishlist__liInner">
+            <h3><%= post.product %></h2>
+            <p><%= post.price %></p>
+          </div>
+        </li>
+
+      <% }); %>
+      </ul>
+    </div>
+    
+    <%- include('footer'); %> 

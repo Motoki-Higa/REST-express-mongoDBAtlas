@@ -15,7 +15,7 @@ const dbName = process.env.DB_NAME;
 
 // Use connect method to connect to the server
 MongoClient.connect(uri, { useUnifiedTopology: true }, function(err, client) {
-  const db = client.db("sample_mflix");
+  const db = client.db(dbName);
   // store db in app.locals gloablly, 
   // then it can be used anywhere in the app by calling req.app.locals.db
   app.locals.db = db;
