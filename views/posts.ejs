@@ -7,44 +7,57 @@
   <body>
     <%- include('header'); %>
 
-    <div class="row justify-content-sm-center">
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="formWrapper">
-          <h2>Add an item to your wishlist!</h2>
-
-          <form action="/posts" method="post" class="form">
-            <div class="form__field">
-              <label for="product">PRODUCT</label>
-              <input type="text" name="product" id="product" >
-            </div>
-            <div class="form__field">
-              <label for="price">PRICE</label>
-              <input type="text" name="price" id="price" >
-            </div>
-            <div class="submitWrapper form__field--submit">
-              <button id="submit" class="btn btn-primary" type="submit">Add</button>
-            </div>
-          </form>
-
+    <div class="container-fluid">
+      <div class="row justify-content-sm-center">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+          <div class="formWrapper">
+            <h2>Add an item to your wishlist!</h2>
+  
+            <form action="/posts" method="post" class="form">
+              <div class="form__field">
+                <label for="product">PRODUCT</label>
+                <input type="text" name="product" id="product" required>
+              </div>
+              <div class="form__field">
+                <label for="price">PRICE</label>
+                <input type="text" name="price" id="price" required>
+              </div>
+              <div class="submitWrapper form__field--submit">
+                <button id="submit" class="btn btn-primary" type="submit">Add</button>
+              </div>
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    
+      <div class="total row">
+        <div class="col-xs-12 col-sm-6 offset-sm-3">
+          <div class="total__item">Total Item: </div>
+          <div class="total__cost">Total Value:</div>
         </div>
       </div>
     </div>
-  
-    <div class="total row">
-      <div class="col-xs-12 col-sm-6 offset-sm-3">
-        <div class="total__item">Total Item: </div>
-        <div class="total__cost">Total Value:</div>
-      </div>
-    </div>
 
-    <div class="wishlist">
+    <div class="wishlist container">
       <ul class="wishlist__ul row">
       <% posts.forEach(post => { %>
 
-        <li class="wishlist__li col-xs-6 col-sm-4">
+        <li class="wishlist__li col-xs-12 col-sm-6 col-md-4">
           <div class="wishlist__liInner">
             <h3><%= post.product %></h2>
             <p><%= post.price %></p>
+            <div class="wishlist__modify">
+              <a href="javascript: void(0)" id="btnEdit" class="wishlist__btn wishlist__btn--edit"><i class="material-icons">mode_edit</i></a>
+              <a href="javascript:void(0)" 
+                data-id="<%= post._id %>"
+                class="wishlist__btn wishlist__btn--delete">
+                  <i class="material-icons">delete</i>
+              </a>
+              <!-- <form action="/posts/<%= post._id %>" method="post">
+                <button>Delete</button>
+              </form> -->
+            </div>
           </div>
         </li>
 

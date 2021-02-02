@@ -15,10 +15,9 @@ router.get('/', async (req, res, next) => {
     if ((await cursor.count()) === 0) {
       console.log("No documents found!");
     }
-    await cursor.forEach( item => console.log(item) );
+    // await cursor.forEach( item => console.log(item) );
     
     // If require all documents matched by a query to be held in memory at the same time, use toArray()
-
     cursor.toArray((queryError, results) => {
       // res.json(results);
       res.render('posts', {
@@ -42,9 +41,11 @@ router.get('/:postId', async (req, res, next) => {
     // await cursor.forEach( item => console.log(item) );
     
     cursor.toArray((queryError, results) => {
-      res.json(results);
+      // res.json(results);
+      res.render('posts', {
+        posts: results
+      });
     })
-    res.sendStatus(200)
   } catch(err) {
     res.json({ message: err });
   }
@@ -67,7 +68,7 @@ router.post('/', async (req, res, next) => {
       console.log(`${result.insertedCount} documents were inserted with the _id: ${result.insertedId}`,);
     }
 
-    // redirect seems to be a best practice, but I don't want users to be sent to  other page, so res.redirect('back') works in the scenario
+    // redirect seems to be the best practice, but I don't want users to be sent to  other page, so res.redirect('back') works in the scenario
     res.redirect('back');
   } catch(err) {
     res.json({ message: err });
@@ -81,6 +82,8 @@ router.delete('/:postId', async (req, res, next) => {
     const item = await collection.deleteOne({_id: ObjectID(req.params.postId)});
 
     console.log(`${item.deletedCount} item was deleted`,);
+
+    res.send({ message: 'Success' });
   } catch(err) {
     res.json({ message: err });
   }
