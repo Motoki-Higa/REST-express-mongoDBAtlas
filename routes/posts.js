@@ -42,7 +42,7 @@ router.get('/:postId', async (req, res, next) => {
     
     cursor.toArray((queryError, results) => {
       // res.json(results);
-      res.render('posts', {
+      res.render('single-post', {
         posts: results
       });
     })
@@ -137,7 +137,7 @@ router.post('/search', async (req, res, next) => {
     // filter what field of each matched document. 0 = not return, 1 = return
     // read mongoDB drivers documentation for more details
     const projection = {
-      _id: 0,
+      _id: 1,
       product: 1,
       price: 1
     };
