@@ -1,11 +1,18 @@
 /*****************************
+reset
+*****************************/
+body a {
+  color: #212529
+}
+
+/*****************************
 header
 *****************************/
 .header {
   width: 100%;
   height: auto;
   padding: 24px;
-  background-color: rgb(95, 168, 159)
+  background-color: #5f79a8;
 }
 
 .header h1 {
@@ -40,6 +47,7 @@ form
 .form label {
   display: block;
   font-size: 14px;
+  color: #777;
 }
 
 .form input {
@@ -52,15 +60,48 @@ form
 }
 
 /*****************************
-total
+filter
 *****************************/
-.total {
-  padding: 24px;
+.filter {
+  padding: 24px 0;
+}
+
+.filter .form__field label {
+  display: inline-block;
+  font-size: 14px;
+  color: #777;
+  margin-right: 12px;
+}
+
+.filter .form__field input {
+  font-size: 12px;
+  padding: 6px;
+}
+
+.filter__search,
+.filter__total {
+  text-align: center;
+}
+
+@media (min-width: 576px) {
+  .filter__search {
+    text-align: left;
+  }
+
+  .filter__total {
+    text-align: right;
+  }
 }
 
 .total__item,
 .total__cost {
-  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  color: #777;
+}
+
+.total__cost {
+  margin-left: 24px;
 }
 
 /*****************************
@@ -82,11 +123,18 @@ wishlist
 
 .wishlist__liInner {
   position: relative;
-  padding: 20px 50px 20px 20px;
   box-sizing: border-box;
   border-radius: 10px;
   overflow: hidden;
   background-color: #f5f5f5;
+  box-shadow: -1px 1px 5px 0px rgba(125, 125, 125, .3);
+}
+
+.wishlist__textBlock {
+  display: block;
+  width: calc(100% - 30px);
+  height: 100%;
+  padding: 20px;
 }
 
 .wishlist__modify {

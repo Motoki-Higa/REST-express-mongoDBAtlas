@@ -89,19 +89,74 @@ router.delete('/:postId', async (req, res, next) => {
   }
 })
 
+// EDIT page (This is just a page for a specific post)
+router.get('/edit/:postId', async (req, res, next) => {
+  try {
+    const collection = req.app.locals.db.collection("parts");
+    const cursor = await collection.find({_id: ObjectID(req.params.postId)});
+  
+    if ((await cursor.count()) === 0) {
+      console.log("No documents found!");
+    }
+    // await cursor.forEach( item => console.log(item) );
+    
+    cursor.toArray((queryError, results) => {
+      // res.json(results);
+      res.render('edit', {
+        posts: results
+      });
+    })
+  } catch(err) {
+    res.json({ message: err });
+  }
+});
+
 // UPDATE (most common and basic)
-router.patch('/:postId', async (req, res, next) => {
+router.post('/edit/:postId', async (req, res, next) => {
   try {
     const collection = req.app.locals.db.collection("parts");
     const uopdateDocument = {$set: req.body};
     const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, uopdateDocument);
 
     console.log(`${result.modifiedCount} documents were updated with the _id: ${req.params.postId}`,);
+
+    res.redirect('/posts');
   } catch (err) {
     res.json({ message: err});
   }
 })
 
+router.post('/search', async (req, res, next) => {
+  // res.send('sanity check');
 
+  try {
+    const collection = req.app.locals.db.collection("parts");
+    collection.createIndex({ product: "text" });
+    const query = { $text: { $search: req.body.search } };
+
+    // filter what field of each matched document. 0 = not return, 1 = return
+    // read mongoDB drivers documentation for more details
+    const projection = {
+      _id: 0,
+      product: 1,
+      price: 1
+    };
+
+    const cursor = await collection.find(query).project(projection);
+  
+    if ((await cursor.count()) === 0) {
+      console.log("No documents found!");
+    }
+    
+    cursor.toArray((queryError, results) => {
+      // res.json(results);
+      res.render('posts', {
+        posts: results
+      });
+    })
+  } catch(err) {
+    res.json({ message: err });
+  }
+})
 
 module.exports = router;

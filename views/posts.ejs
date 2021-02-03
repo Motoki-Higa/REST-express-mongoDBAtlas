@@ -30,12 +30,30 @@
           </div>
         </div>
       </div>
-    
-      <div class="total row">
-        <div class="col-xs-12 col-sm-6 offset-sm-3">
-          <div class="total__item">Total Item: </div>
-          <div class="total__cost">Total Value:</div>
+    </div>
+
+    <% // calculate total value
+      let totalVal = 0;
+      posts.forEach( post => totalVal += parseInt(post.price) );
+    %> 
+
+    <div class="container">
+      <div class="filter row">
+  
+        <div class="filter__search col-xs-12 col-sm-6">
+          <form action="/posts/search" method="post" id="search-form">
+            <div class="form__field">
+              <label for="search">SEARCH</label>
+              <input type="text" name="search" id="search">
+            </div>
+          </form>
         </div>
+  
+        <div class="filter__total col-xs-12 col-sm-6">
+          <div class="total__item">Total Item: <%= posts.length %></div>
+          <div class="total__cost">Total Value: <%= totalVal.toLocaleString('en') %> Yen</div>
+        </div>
+  
       </div>
     </div>
 
@@ -45,18 +63,20 @@
 
         <li class="wishlist__li col-xs-12 col-sm-6 col-md-4">
           <div class="wishlist__liInner">
-            <h3><%= post.product %></h2>
-            <p><%= post.price %></p>
+            <a href="/posts/<%= post._id %>" class="wishlist__textBlock">
+              <h3><%= post.product %></h2>
+              <p><%= parseInt(post.price).toLocaleString('en') %></p>
+            </a>
             <div class="wishlist__modify">
-              <a href="javascript: void(0)" id="btnEdit" class="wishlist__btn wishlist__btn--edit"><i class="material-icons">mode_edit</i></a>
+              <a href="/posts/edit/<%= post._id %>" 
+                class="wishlist__btn wishlist__btn--edit">
+                  <i class="material-icons">mode_edit</i>
+              </a>
               <a href="javascript:void(0)" 
                 data-id="<%= post._id %>"
                 class="wishlist__btn wishlist__btn--delete">
                   <i class="material-icons">delete</i>
               </a>
-              <!-- <form action="/posts/<%= post._id %>" method="post">
-                <button>Delete</button>
-              </form> -->
             </div>
           </div>
         </li>
