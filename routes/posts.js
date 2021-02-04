@@ -170,7 +170,11 @@ router.post("/:postId/upload", upload.single('image'), async (req, res, next) =>
     const collection = req.app.locals.db.collection("items");
     // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). 
     // req.file.location gets only the path. But it needs to be key/val pair an object, so put it in {image: xxxx} to make it valid type
-    const updateDocument = { $set: {image: req.file.location} };
+    const updateDocument = { 
+      $set: {
+        image: req.file.location
+      } 
+    };
     const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, updateDocument);
   } catch (err) {
     res.json({ message: err });

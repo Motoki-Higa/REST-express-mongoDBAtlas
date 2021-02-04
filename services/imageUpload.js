@@ -11,7 +11,7 @@ const s3Config = new aws.S3({
 
 const fileFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
-      cb(null, true);
+      cb(null, true); // true = store image
     } else {
       cb(new Error("Invalid file type, only JPEG and PNG is allowed!"), false);
     }
@@ -35,11 +35,12 @@ const multerS3Config = multerS3({
     metadata: function (req, file, cb) {
         cb(null, { fieldName: file.fieldname });
     },
-    // Set / Modify original file name
+    // Set/Modify original file name
     key: function (req, file, cb) {
-        console.log(file)
-        cb(null, Date.now().toString());
-    }
+        cb(null, Date.now().toString() + file.originalname);
+    },
+    // without defining contentType like below, the image gets downloaded instead of displaying when you access url
+    contentType: multerS3.AUTO_CONTENT_TYPE,
 });
 
 // Create multer function for upload
