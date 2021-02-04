@@ -18,13 +18,19 @@ Make sure you have installed all of the following prerequisites on your developm
 
 #### Main
 
-- Backend - [Express.js](https://www.npmjs.com/package/express)
-- DB driver - [MongoDB native driver](https://www.npmjs.com/package/mongodb)
-- DB - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- [EJS](https://ejs.co/) - Frontend
+- [Express.js](https://www.npmjs.com/package/express) - Backend
+- [MongoDB native driver](https://www.npmjs.com/package/mongodb) - DB driver
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) - DB
+- [AWS S3](https://aws.amazon.com/s3/) - FS
 
 #### Key packages (But not limited to below)
 
 - [dotenv](https://www.npmjs.com/package/dotenv)
+- [multer](https://www.npmjs.com/package/multer) - used for file upload function
+- [multer s3](https://www.npmjs.com/package/multer-s3) - used for file upload function
+- [aws-sdk](https://www.npmjs.com/package/aws-sdk) - used for file upload function
+
 
 ### Installing a project
 
@@ -42,13 +48,26 @@ npm install
 
 ### Connecting with DB
 
-As it's a personal db account, you might have to prepare your own NoSQL database to get the project working.
+Personal mongoDB Atlas is used for the project.
+If you like to get the project working, please use your NoSQL database account.
 
-Once your database is ready, create a `.env` file and save the connection and the database name like below:
+Once your database is set, create a `.env` file and save the connection and the database name like below:
 
 ```
 DB_CONNECTION=your-connection-name
 DB_NAME=your-db-name
+```
+
+### Connecting with FS
+
+Personal AWS S3 is used for the project.
+If you like to get the project working, please use your own account.
+
+Once your FS is set, get a 'S3_ACCESS_KEY' and 'S3_ACCESS_SECRET' of your bucket, and add it to the `.env` file you created above.
+
+```
+S3_ACCESS_KEY=your-key
+S3_ACCESS_SECRET=your-secret
 ```
 
 ### Start a project
