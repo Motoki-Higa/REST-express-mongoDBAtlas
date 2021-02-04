@@ -16,8 +16,8 @@
             <% posts.forEach( post => { %>
             <form action="/posts/edit/<%= post._id %>" method="post" class="form">
                 <div class="form__field">
-                    <label for="product">CURRENT PRODUCT</label>
-                    <input type="text" name="product" id="product" value="<%= post.product %>" required>
+                    <label for="item">CURRENT ITEM</label>
+                    <input type="text" name="item" id="item" value="<%= post.item %>" required>
                 </div>
                 <div class="form__field">
                     <label for="price">CURRENT PRICE</label>
