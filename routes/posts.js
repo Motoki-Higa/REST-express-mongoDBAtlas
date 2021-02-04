@@ -2,6 +2,9 @@ var express = require('express');
 const { ObjectID } = require('mongodb');
 var router = express.Router();
 
+const upload = require("../services/ImageUpload");
+const singleUpload = upload.single("image"); // single() is part of multer function
+
 // Basic CRUD operations
 // NOTE : retrieve database instance stored in req.app.locals.db
 
@@ -115,8 +118,8 @@ router.get('/edit/:postId', async (req, res, next) => {
 router.post('/edit/:postId', async (req, res, next) => {
   try {
     const collection = req.app.locals.db.collection("items");
-    const uopdateDocument = {$set: req.body};
-    const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, uopdateDocument);
+    const updateDocument = { $set: req.body };
+    const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, updateDocument);
 
     console.log(`${result.modifiedCount} documents were updated with the _id: ${req.params.postId}`,);
 
@@ -159,5 +162,19 @@ router.post('/search', async (req, res, next) => {
     res.json({ message: err });
   }
 })
+
+// Re-upload image
+router.post("/:postId/upload", upload.single('image'), async (req, res, next) => {
+  try {
+    console.log("HERE IS THE req", req.file.location);
+    const collection = req.app.locals.db.collection("items");
+    // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). 
+    // req.file.location gets only the path. But it needs to be key/val pair an object, so put it in {image: xxxx} to make it valid type
+    const updateDocument = { $set: {image: req.file.location} };
+    const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, updateDocument);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
 
 module.exports = router;

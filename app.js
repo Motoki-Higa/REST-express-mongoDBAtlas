@@ -5,9 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 const MongoClient = require('mongodb').MongoClient;
+const cors = require("cors");
 require('dotenv').config();
 
-// ================ mongoDB atlas ==================
+// ================ mongoDB atlas config ==================
 // Connection URL
 const uri = process.env.DB_CONNECTION;
 // Database Name
@@ -22,7 +23,7 @@ MongoClient.connect(uri, { useUnifiedTopology: true }, function(err, client) {
 
   // client.close();
 });
-// =================================================
+// =========================================================
 
 // import routes
 var indexRouter = require('./routes/index');
@@ -40,6 +41,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 // middlewares (set routing)
 app.use('/', indexRouter);
