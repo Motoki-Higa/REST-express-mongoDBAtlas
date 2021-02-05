@@ -1,6 +1,12 @@
 # REST-express-mongoDBAtlas
 
-Simple CRUD REST api app which is connected to mongoDB via mongoDB native driver.
+Simple CRUD REST api app.
+
+__WISHMAN__<br>
+It's a wish list app with minimul input fields (ITEM / PRICE / IMAGE).<br>
+You can post / edit / update / delete your wish items.
+
+*CSS preprocessor is not used as main purpose of this app to focus on REST api and CRUD operation.
 
 ## Getting Started
 
