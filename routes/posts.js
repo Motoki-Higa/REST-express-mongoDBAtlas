@@ -3,7 +3,6 @@ const { ObjectID } = require('mongodb');
 var router = express.Router();
 
 const upload = require("../services/ImageUpload");
-const singleUpload = upload.single("image"); // single() is part of multer function
 
 // Basic CRUD operations
 // NOTE : retrieve database instance stored in req.app.locals.db
@@ -55,10 +54,12 @@ router.get('/:postId', async (req, res, next) => {
 });
 
 // POST a post
-router.post('/', async (req, res, next) => {
+router.post('/', upload.single('image'), async (req, res, next) => {
   try {
     const item = req.body.item;
     const price = req.body.price;
+    const image = req.file.location; // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). req.file.location gets only the path.
+    const doc = {item, price, image};
 
     if ( (item === '') || (price === '') ){
       // prevent empty submission in backend in case someone try to hack frontend validation
@@ -66,7 +67,7 @@ router.post('/', async (req, res, next) => {
     } else {
       // if both fields has value, then store in db
       const collection = req.app.locals.db.collection("items");
-      const result = await collection.insertOne(req.body);
+      const result = await collection.insertOne(doc);
 
       console.log(`${result.insertedCount} documents were inserted with the _id: ${result.insertedId}`,);
     }
@@ -115,13 +116,22 @@ router.get('/edit/:postId', async (req, res, next) => {
 });
 
 // UPDATE (most common and basic)
-router.post('/edit/:postId', async (req, res, next) => {
+router.post('/edit/:postId', upload.single('image'), async (req, res, next) => {
   try {
-    const collection = req.app.locals.db.collection("items");
-    const updateDocument = { $set: req.body };
-    const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, updateDocument);
+    const item = req.body.item;
+    const price = req.body.price;
+    const image = req.file.location;
+    const doc = {item, price, image};
 
-    console.log(`${result.modifiedCount} documents were updated with the _id: ${req.params.postId}`,);
+    if ( (item === '') || (price === '') ){
+      console.log('===== item value is empty =====');
+    } else {
+      const collection = req.app.locals.db.collection("items");
+      const updateDocument = { $set: doc };
+      const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, updateDocument);
+
+      console.log(`${result.modifiedCount} documents were updated with the _id: ${req.params.postId}`,);
+    }
 
     res.redirect('/posts');
   } catch (err) {

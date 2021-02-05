@@ -12,52 +12,29 @@
       posts.forEach( post => totalVal += parseInt(post.price) );
     %> 
 
-    <div class="container">
-      <div class="filter row">
-  
-        <div class="filter__search col-xs-12 col-sm-6">
-          <form action="/posts/search" method="post" id="search-form">
-            <div class="form__field">
-              <label for="search">SEARCH</label>
-              <input type="text" name="search" id="search">
-            </div>
-          </form>
+
+    <% posts.forEach(post => { %>
+
+      <div class="single-display">
+        <picture><img src="<%= post.image %>" alt=""></picture>
+        <div class="single-display__txtbox">
+          <h2><%= post.item %></h2>
+          <p><%= parseInt(post.price).toLocaleString('en') %> Yen</p>
         </div>
-  
-        <div class="filter__total col-xs-12 col-sm-6">
-          <div class="total__item">Total Item: <%= posts.length %></div>
-          <div class="total__cost">Total Value: <%= totalVal.toLocaleString('en') %> Yen</div>
+
+        <div class="sigle-display__settingBox">
+          <a href="/posts/edit/<%= post._id %>" 
+            class="single-display__btn single-display__btn--edit">
+              <i class="material-icons">mode_edit</i>
+          </a>
+          <a href="javascript:void(0)" 
+            data-id="<%= post._id %>"
+            class="single-display__btn single-display__btn--delete">
+              <i class="material-icons">delete</i>
+          </a>
         </div>
-  
       </div>
-    </div>
 
-    <div class="wishlist container">
-      <ul class="wishlist__ul row">
-      <% posts.forEach(post => { %>
-
-        <li class="wishlist__li col-xs-12 col-sm-6 col-md-4">
-          <div class="wishlist__liInner">
-            <a href="/posts/<%= post._id %>" class="wishlist__textBlock">
-              <h3><%= post.item %></h2>
-              <p><%= parseInt(post.price).toLocaleString('en') %> Yen</p>
-            </a>
-            <div class="wishlist__modify">
-              <a href="/posts/edit/<%= post._id %>" 
-                class="wishlist__btn wishlist__btn--edit">
-                  <i class="material-icons">mode_edit</i>
-              </a>
-              <a href="javascript:void(0)" 
-                data-id="<%= post._id %>"
-                class="wishlist__btn wishlist__btn--delete">
-                  <i class="material-icons">delete</i>
-              </a>
-            </div>
-          </div>
-        </li>
-
-      <% }); %>
-      </ul>
-    </div>
+    <% }); %>
     
     <%- include('footer'); %> 

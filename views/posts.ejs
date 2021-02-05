@@ -13,7 +13,7 @@
           <div class="formWrapper">
             <h2>Add an item to your wishlist!</h2>
   
-            <form action="/posts" method="post" class="form">
+            <form action="/posts" method="post" class="form" enctype="multipart/form-data">
               <div class="form__field">
                 <label for="item">ITEM</label>
                 <input type="text" name="item" id="item" required>
@@ -21,6 +21,10 @@
               <div class="form__field">
                 <label for="price">PRICE</label>
                 <input type="text" name="price" id="price" required>
+              </div>
+              <div class="form__field">
+                <label for="price">IMAGE</label>
+                <input type="file" name="image" />
               </div>
               <div class="submitWrapper form__field--submit">
                 <button id="submit" class="btn btn-primary" type="submit">Add</button>

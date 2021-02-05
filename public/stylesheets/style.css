@@ -38,6 +38,19 @@ form
   margin-top: 10px;
 }
 
+.form__field picture {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.form__field picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .submitWrapper {
   width: 100%;
   text-align: center;
@@ -173,4 +186,45 @@ wishlist
 
 .wishlist h3 {
   font-size: 16px;
+}
+
+/*****************************
+single-display
+*****************************/
+.single-display {
+  position: relative;
+  width: 90%;
+  margin: 20px auto 0;
+}
+
+.single-display picture,
+.single-display picture img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.single-display__txtbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 20px 0 0 20px;
+}
+
+.single-display__btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  padding: 12px;
+}
+
+.single-display__btn--edit {
+  background-color: #d2d8de;
+}
+
+.single-display__btn--delete {
+  background-color: #bbbbbb;
 }
