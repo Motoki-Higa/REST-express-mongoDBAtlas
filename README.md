@@ -40,19 +40,19 @@ Make sure you have installed all of the following prerequisites on your developm
 
 ### Installing a project
 
-Clone the project to your local (cd /your_directory)
+Clone a project to your local (cd /your_directory)
 
 ```
 git clone https://github.com/Motoki-Higa/REST-express-mongoDBAtlas.git
 ```
 
-To install the dependencies, run this in the application folder from the command-line:
+To install dependencies, run this in the application folder from the command-line:
 
 ```
 npm install
 ```
 
-### Connecting with DB
+### Connecting to DB
 
 Personal mongoDB Atlas is used for the project.
 If you like to get the project working, please use your NoSQL database account.
@@ -64,7 +64,7 @@ DB_CONNECTION=your-connection-name
 DB_NAME=your-db-name
 ```
 
-### Connecting with FS
+### Connecting to FS
 
 Personal AWS S3 is used for the project.
 If you like to get the project working, please use your own account.
