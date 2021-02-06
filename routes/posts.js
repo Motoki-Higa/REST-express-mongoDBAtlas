@@ -2,7 +2,7 @@ var express = require('express');
 const { ObjectID } = require('mongodb');
 var router = express.Router();
 
-const upload = require("../services/ImageUpload");
+const upload = require("../services/imageUpload");
 
 // Basic CRUD operations
 // NOTE : retrieve database instance stored in req.app.locals.db
