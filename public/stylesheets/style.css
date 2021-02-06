@@ -148,6 +148,7 @@ wishlist
   width: calc(100% - 30px);
   height: 100%;
   padding: 20px;
+  z-index: -1;
 }
 
 .wishlist__modify {

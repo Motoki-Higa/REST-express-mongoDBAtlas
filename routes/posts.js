@@ -58,7 +58,7 @@ router.post('/', upload.single('image'), async (req, res, next) => {
   try {
     const item = req.body.item;
     const price = req.body.price;
-    const image = req.file.location; // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). req.file.location gets only the path.
+    const image = req.file ? req.file.location : null; // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). req.file.location gets only the path.
     const doc = {item, price, image};
 
     if ( (item === '') || (price === '') ){
