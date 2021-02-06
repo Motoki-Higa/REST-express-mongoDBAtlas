@@ -17,7 +17,7 @@ const fileFilter = (req, file, cb) => {
     }
 };
 
-// This is just to test locally if multer is working fine.
+// This is just to test locally if multer is working fine
 // const storage = multer.diskStorage({
 //     destination: (req, res, cb) => {
 //         cb(null, 'src/api/media/profiles')
