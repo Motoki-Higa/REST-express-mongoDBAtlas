@@ -69,11 +69,12 @@ DB_NAME=your-db-name
 Personal AWS S3 is used for the project.
 If you like to get the project working, please use your own account.
 
-Once your FS is set, get a 'S3_ACCESS_KEY' and 'S3_ACCESS_SECRET' of your bucket, and add it to the `.env` file you created above.
+Once your FS is set, update below variables in `.env` file.
 
 ```
 S3_ACCESS_KEY=your-key
 S3_ACCESS_SECRET=your-secret
+S3_BUCKET=your-bucket-name
 ```
 
 ### Start a project

@@ -104,10 +104,10 @@ router.delete('/:postId', async (req, res, next) => {
     const s3 = new aws.S3({
       secretAccessKey: process.env.S3_ACCESS_SECRET,
       accessKeyId: process.env.S3_ACCESS_KEY,
-      Bucket: "wishman-item-images",
+      Bucket: process.env.S3_BUCKET,
     });
     const params = { 
-      Bucket: "wishman-item-images", 
+      Bucket: process.env.S3_BUCKET, 
       Key: fileKey
     };
     s3.deleteObject(params, function(err, data) {

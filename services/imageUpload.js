@@ -30,7 +30,7 @@ const fileFilter = (req, file, cb) => {
 // Create multer-s3 function for storage
 const multerS3Config = multerS3({
     s3: s3Config,
-    bucket: "wishman-item-images",
+    bucket: process.env.S3_BUCKET,
     // metadata for putting field name
     metadata: function (req, file, cb) {
         cb(null, { fieldName: file.fieldname });
