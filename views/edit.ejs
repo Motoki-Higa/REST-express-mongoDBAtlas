@@ -7,22 +7,32 @@
   <body>
     <%- include('header'); %>
 
-    <div class="container-fluid">
-      <div class="row justify-content-sm-center">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
-          <div class="formWrapper">
-            <h2>Edit and Update!</h2>
-  
+    <div class="wrapper">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+    
             <% posts.forEach( post => { %>
-            <form action="/posts/edit/<%= post._id %>" method="post" class="form" enctype="multipart/form-data">
-                <div class="form__field">
-                  <label for="item">CURRENT ITEM</label>
-                  <input type="text" name="item" id="item" value="<%= post.item %>" required>
-                </div>
-                <div class="form__field">
-                  <label for="price">CURRENT PRICE</label>
-                  <input type="text" name="price" id="price" value="<%= post.price %>" required>
-                </div>
+            <div class="formWrapper">
+              <h2>Edit and Update</h2>
+              <form action="/posts/edit/<%= post._id %>" method="post" class="form">
+                  <div class="form__field">
+                    <label for="item">CURRENT ITEM</label>
+                    <input type="text" name="item" id="item" value="<%= post.item %>" required>
+                  </div>
+                  <div class="form__field">
+                    <label for="price">CURRENT PRICE</label>
+                    <input type="text" name="price" id="price" value="<%= post.price %>" required>
+                  </div>
+                  <div class="submitWrapper form__field--submit">
+                    <button id="submit" class="btn btn-primary" type="submit">Update</button>
+                  </div>
+              </form>
+            </div>
+  
+            <div class="formWrapper">
+              <h2>Change Image</h2>
+              <form action="/posts/edit-file/<%= post._id %>" method="post" class="form" enctype="multipart/form-data">
                 <div class="form__field">
                   <label for="price">CURRENT IMAGE</label>
                   <% if (post.file){ %>
@@ -33,12 +43,20 @@
                 <div class="submitWrapper form__field--submit">
                   <button id="submit" class="btn btn-primary" type="submit">Update</button>
                 </div>
-            </form>
+              </form>
+            </div>
             <% }); %> 
+
+            <div class="row justify-content-center">
+              <a href="/posts" class="btn btn-primary">Go back to the list page</a>
+            </div>
+  
+            
+              
             
           </div>
         </div>
       </div>
     </div>
-    
+
     <%- include('footer'); %> 

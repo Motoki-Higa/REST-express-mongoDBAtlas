@@ -6,6 +6,13 @@ body a {
 }
 
 /*****************************
+wrapper
+*****************************/
+.wrapper {
+  padding: 24px 0;
+}
+
+/*****************************
 header
 *****************************/
 .header {
@@ -28,6 +35,10 @@ form
   margin-top: 24px;
   padding: 24px;
   background-color: #d2d8de;
+}
+
+.formWrapper:not(:first-of-type){
+  margin-bottom: 20px;
 }
 
 .form {
@@ -190,42 +201,42 @@ wishlist
 }
 
 /*****************************
-single-display
+single
 *****************************/
-.single-display {
+.single {
   position: relative;
-  width: 90%;
-  margin: 20px auto 0;
 }
 
-.single-display picture,
-.single-display picture img {
+.single picture,
+.single picture img {
   position: relative;
   display: block;
   width: 100%;
   height: auto;
 }
 
-.single-display__txtbox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 20px 0 0 20px;
+.single__txtBox {
+  margin-top: 20px;
 }
 
-.single-display__btn {
+.single__btn {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50%;
-  padding: 12px;
+  padding: 18px;
+  border-radius: 0.25rem;
 }
 
-.single-display__btn--edit {
+.single__btn--edit {
   background-color: #d2d8de;
 }
 
-.single-display__btn--delete {
+.single__btn--delete {
   background-color: #bbbbbb;
+}
+
+.single__btnRow {
+  margin-top: 20px;
 }

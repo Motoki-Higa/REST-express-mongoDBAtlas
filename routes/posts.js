@@ -146,28 +146,15 @@ router.get('/edit/:postId', async (req, res, next) => {
   }
 });
 
-// UPDATE (most common and basic)
-router.post('/edit/:postId', upload.single('image'), async (req, res, next) => {
+// UPDATE text
+router.post('/edit/:postId', async (req, res, next) => {
   try {
     const item = req.body.item;
     const price = req.body.price;
-    // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). req.file.location gets only the path.
-    const location = req.file ? req.file.location : null; 
-    const key = req.file ? req.file.key : null; 
-    
-    const doc = {
-      item, 
-      price, 
-      file: {
-        location,
-        key,
-      }
-    };
-
-    console.log("req.file: " + JSON.stringify(req.file));
+    const doc = {item, price};
 
     if ( (item === '') || (price === '') ){
-      console.log('===== item value is empty =====');
+      console.log('===== Item value is empty =====');
     } else {
       const collection = req.app.locals.db.collection("items");
       const updateDocument = { $set: doc };
@@ -176,7 +163,37 @@ router.post('/edit/:postId', upload.single('image'), async (req, res, next) => {
       console.log(`${result.modifiedCount} documents were updated with the _id: ${req.params.postId}`,);
     }
 
-    res.redirect('/posts');
+    res.redirect('back');
+  } catch (err) {
+    res.json({ message: err});
+  }
+})
+
+// UPDATE image
+router.post('/edit-file/:postId', upload.single('image'), async (req, res, next) => {
+  try {
+    // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). req.file.location gets only the path.
+    const location = req.file ? req.file.location : null; 
+    const key = req.file ? req.file.key : null; 
+
+    let doc = {
+      file: {
+        location,
+        key,
+      }
+    }
+
+    if (req.file === undefined){
+      console.log('===== Item value is empty =====');
+    } else {
+      const collection = req.app.locals.db.collection("items");
+      const updateDocument = { $set: doc };
+      const result = await collection.updateOne({_id: ObjectID(req.params.postId)}, updateDocument);
+
+      console.log(`${result.modifiedCount} documents were updated with the _id: ${req.params.postId}`,);
+    }
+
+    res.redirect('back');
   } catch (err) {
     res.json({ message: err});
   }
