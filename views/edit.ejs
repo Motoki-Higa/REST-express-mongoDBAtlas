@@ -25,8 +25,8 @@
                 </div>
                 <div class="form__field">
                   <label for="price">CURRENT IMAGE</label>
-                  <% if (post.image){ %>
-                    <picture><img src="<%= post.image %>" alt=""></picture>
+                  <% if (post.file){ %>
+                    <picture><img src="<%= post.file.location %>" alt=""></picture>
                   <% }; %> 
                   <input type="file" name="image" />
                 </div>

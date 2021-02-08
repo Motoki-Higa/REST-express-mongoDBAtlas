@@ -16,7 +16,9 @@
     <% posts.forEach(post => { %>
 
       <div class="single-display">
-        <picture><img src="<%= post.image %>" alt=""></picture>
+      <% if (post.file){ %>
+        <picture><img src="<%= post.file.location %>" alt=""></picture>
+      <% }; %> 
         <div class="single-display__txtbox">
           <h2><%= post.item %></h2>
           <p><%= parseInt(post.price).toLocaleString('en') %> Yen</p>
