@@ -1,15 +1,15 @@
 
-const items = document.querySelectorAll('.wishlist__btn--delete');
+const items = document.querySelectorAll('.btn--delete');
 
 items.forEach(item => {
     item.addEventListener('click', function(e){
         e.preventDefault();
         
         const id = this.getAttribute('data-id');
-        const url = String(window.location.href);
-        const apiUrl = url + '/' + id;
+        const url = String(window.location.origin);
+        const apiUrl = url + '/posts/' + id;
 
-        console.log(url);
+        console.log(apiUrl);
 
         fetch(apiUrl, {
             method: 'DELETE'

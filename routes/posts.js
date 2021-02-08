@@ -58,8 +58,18 @@ router.post('/', upload.single('image'), async (req, res, next) => {
   try {
     const item = req.body.item;
     const price = req.body.price;
-    const image = req.file ? req.file.location : null; // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). req.file.location gets only the path.
-    const doc = {item, price, image};
+    // req.file is part of multer. It returns all the info of the image(a lot of unnecessary info). req.file.location gets only the path.
+    const location = req.file ? req.file.location : null; 
+    const key = req.file ? req.file.key : null; 
+    
+    const doc = {
+      item, 
+      price, 
+      file: {
+        location,
+        key,
+      }
+    };
 
     if ( (item === '') || (price === '') ){
       // prevent empty submission in backend in case someone try to hack frontend validation
