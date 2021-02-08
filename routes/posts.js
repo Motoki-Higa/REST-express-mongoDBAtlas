@@ -1,7 +1,7 @@
 var express = require('express');
 const { ObjectID } = require('mongodb');
 var router = express.Router();
-
+const aws = require("aws-sdk");
 const upload = require("../services/imageUpload");
 
 // Basic CRUD operations
@@ -93,9 +93,30 @@ router.post('/', upload.single('image'), async (req, res, next) => {
 router.delete('/:postId', async (req, res, next) => {
   try {
     const collection = req.app.locals.db.collection("items");
-    const item = await collection.deleteOne({_id: ObjectID(req.params.postId)});
+    const item = await collection.findOne({_id: ObjectID(req.params.postId)});
+    const fileKey = item.file.key;
 
-    console.log(`${item.deletedCount} item was deleted`,);
+    // ===== Take care of deleting an item from database ======
+    const itemToDelete = collection.deleteOne({_id: ObjectID(req.params.postId)});
+    // ==============================================================
+
+    // ===== Take care of deleting a file(such as image) from aws s3 ======
+    const s3 = new aws.S3({
+      secretAccessKey: process.env.S3_ACCESS_SECRET,
+      accessKeyId: process.env.S3_ACCESS_KEY,
+      Bucket: "wishman-item-images",
+    });
+    const params = { 
+      Bucket: "wishman-item-images", 
+      Key: fileKey
+    };
+    s3.deleteObject(params, function(err, data) {
+      if (err) console.log(err, err.stack);  // error
+      else     console.log();                 // deleted
+    });
+    // =====================================================================
+
+    console.log(`${itemToDelete.deletedCount} item was deleted`,);
 
     res.send({ message: 'Success' });
   } catch(err) {

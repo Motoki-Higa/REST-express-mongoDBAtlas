@@ -1,4 +1,3 @@
-
 const items = document.querySelectorAll('.btn--delete');
 
 items.forEach(item => {
@@ -8,11 +7,13 @@ items.forEach(item => {
         const id = this.getAttribute('data-id');
         const url = String(window.location.origin);
         const apiUrl = url + '/posts/' + id;
+        const body = {key: '123'}
 
         console.log(apiUrl);
 
         fetch(apiUrl, {
-            method: 'DELETE'
+            method: 'DELETE',
+            body: body
         })
         .then(response => response.json())
         .then(data => {
